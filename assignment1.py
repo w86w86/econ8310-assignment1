@@ -36,10 +36,11 @@ model = modelFit.make_future_dataframe(periods=744, freq='h', include_history=Fa
 forecast = modelFit.predict(model)
 pred = forecast.yhat.tolist()
 
-"""###Dealing with the negative values"""
+"""###Dealing with the negative values """
 negative_pred = [(ind, val) \
                  for ind, val in enumerate(pred) if val<0]
 
 """####Replace the negative value with min of trip in an hour from our data"""
 
 pred = [max(min(trip.y), val) for val in pred]
+
